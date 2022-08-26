@@ -86,10 +86,6 @@ def remove_nested_divs(html):
         cleaned = re.sub(r"<[^>]*>", "", match.group())
         html = re.sub(r'<div class="bbcode_container">(.|\n)*?<\/div>', cleaned, html, 1)
 
-    # for match in re.finditer(r"<div class=\"[^\"']*?\bjs-post__content-text restore h-wordwrap\" itemprop=\"text\b[^\"']*?\">((.|\n)*?)<\/div>", html):
-    #     cleaned = re.sub(r"<[^>]*>", "", match.group())
-    #     html = re.sub(r"<div class=\"[^\"']*?\bjs-post__content-text restore h-wordwrap\" itemprop=\"text\b[^\"']*?\">((.|\n)*?)<\/div>", cleaned, html, 1)
-
     return html
 
 
