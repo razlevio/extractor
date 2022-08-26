@@ -1,6 +1,6 @@
 # Extractor
 
-Simple tool to extract posts and comments data from different forums. The tool extract raw data without information about dates, users, etc.
+Simple tool to extract posts and comments data from different forums. The tool extract raw data without information about dates, users, signatures etc.
 
 ## Features
 
