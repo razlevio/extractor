@@ -1,0 +1,53 @@
+1. I started noticing if I just type in my site without a "www" it goes to the site but i'm not logged in when I should be.  If I had a "www" and refresh - i'm logged in.  So it has something to do with the www vs non-www link - how can i stay logged in for either?
+
+2. You should redirect all of your traffic to the proper domain be it www or non www, whatever is entered into the admincp
+
+3. You can do it either by .htaccess file or forward the url to the www in your server's control panel
+- - - Updated - - -
+Where did Zachery come from?  He beat me to it
+
+4. Originally posted by Zachery
+You should redirect all of your traffic to the proper domain be it www or non www, whatever is entered into the admincp
+That's fine but the emails sent out have the www in them.  If you just go to domain.com it takes you there, but you're not logged in, it seems to be a cookie issue.
+Originally posted by Merjawy
+You can do it either by .htaccess file or forward the url to the www in your server's control panel
+- - - Updated - - -
+Where did Zachery come from?  He beat me to it
+What would my .htaccess need to say or what would I need to add to it?
+
+5. Do you use .htaccess or not?
+Do search on it and you will learn more about it's use
+Again, you could forward your domain in control panel on your server
+
+6. Originally posted by Merjawy
+Do you use .htaccess or not?
+Do search on it and you will learn more about it's use
+Again, you could forward your domain in control panel on your server
+Like in cPanel?  I apologize for the newbie questions and all - maybe i'm just having a brain fart day.
+
+7. No need to apologize, it looks like it would be easier for you to just go to your cPanel and forward the domain to www
+
+8. Add the following to an .htaccess file in the root of your site to redirect www.domain.com to just domain.com:
+Code:
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ &#91;NC&#93;
+RewriteRule ^(.*)$ http://%1/$1 &#91;R=301,L&#93;
+If you don't have an .htaccess there already, create one with that and upload it. If you do, you should add that to it.
+
+9. Originally posted by Matthew Gordon
+Add the following to an .htaccess file in the root of your site to redirect www.domain.com to just domain.com:
+Code:
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ &#91;NC&#93;
+RewriteRule ^(.*)$ http://%1/$1 &#91;R=301,L&#93;
+If you don't have an .htaccess there already, create one with that and upload it. If you do, you should add that to it.
+This would be closer to what I need. It seems if you don't use the "www" the cookies don't work from previous sessions. I need the non-www to forward to the www, I tried adding it in the cpanel and it created a redirect loop.... no other redirects listed.
+
+10. Originally posted by uReside.com
+This would be closer to what I need.  It seems if you don't use the "www" the cookies don't work from previous sessions.  I need the non-www to forward to the www, I tried adding it in the cpanel and it created a redirect loop.... no other redirects listed.
+This will redirect non-www to www:
+Code:
+RewriteEngine On
+RewriteCond %{HTTP_HOST} !^www\.
+RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 &#91;R=301,L&#93;
+

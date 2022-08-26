@@ -1,0 +1,34 @@
+1. I like to display a horizontal list of tags / categories assigned to different Topics. On click this, users can view only Topic titles. Is it possible?
+
+2. Not sure what you mean, can you explain a bit more please?
+
+3. Just like categories in Wordpress blog.
+
+Board
+--Forum
+----Topic 1 about Cat
+----Topic 2 about Rat
+----Topic 3 about Cat
+----Topic 4 about Rat
+----Topic 5 about Tiger
+
+Few buttons near footer: CAT, RAT, TIGER
+
+Users when click 'RAT' then he /she may view:
+
+Board
+--Forum
+----Topic 2 about Rat
+----Topic 4 about Rat
+
+4. Can anyone help me please. 
+
+5. wbxpress wrote:Can anyone help me please. 
+this is not something that phpbb does. it does not have "tags"  like a blog does.
+
+you would have to try to find someone to write up a MOD for something like this.
+
+try the MOD release forum and/or the MOD request forum here.
+
+robert
+
