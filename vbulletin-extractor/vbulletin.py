@@ -95,7 +95,7 @@ def output_proccesing(data):
     :param data: Cleaned posts data
     :type data: str
     """
-    print(data)
+    
     # Enumerating each post
     data = dict(enumerate(data,1))
 
