@@ -17,18 +17,19 @@ Simple tool to extract posts and comments data from different forums. The tool e
 
 ## Dependencies
 
-* [Selenium](https://www.selenium.dev/) >= UPDATEVESION
-* [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/) >= UPDATEVESION
+* [Selenium](https://www.selenium.dev/) >= 4.4.3
+* [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/) >= 4.11.1
+
 
 ## Usage
 ```bash
-    $ python extractor.py -flag url
+    $ python controller.py
+```
+or
+```bash
+    $ python controller.py -flag url
     # flags:
     #   -ph for phpBB
     #   -b for vBulletin
     #   -r for reddit
-```
-or
-```bash
-    $ python extractor.py
 ```
