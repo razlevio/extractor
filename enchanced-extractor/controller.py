@@ -1,5 +1,4 @@
 from extractor import Extractor
-from urllib.parse import urlparse
 import argparse
 
 # Constants for forum supportability
@@ -12,12 +11,37 @@ VBULLETIN_TARGET_CLASS = "js-post__content-text restore h-wordwrap"
 REDDIT_TARGET_ELEMENT = "p"
 REDDIT_TARGET_CLASS = "_1qeIAgB0cPwnLhDF9XSiJM"
 
-# phpBB_url = "https://www.phpbb.com/community/viewtopic.php?f=46&t=2159437"
-# vBulletin_url = "https://forum.vbulletin.com/forum/vbulletin-3-8/vbulletin-3-8-questions-problems-and-troubleshooting/414325-www-vs-non-www-url-causing-site-not-to-login"
-# reddit_url = "https://www.reddit.com/r/funkopop/comments/wyd4ht/next_nft_drop_is_dc_series_2_dang_they_really/"
 
 def main():
-    interactive_mode()
+    # Parsing the command line arguments
+    args = parse_arguments()
+
+    # Check if user want to execute the program interactively or by providing CLI arguments
+    if all(value == None for value in args.values()):
+        # Executing the program interactively
+        interactive_mode()
+    else:
+        # Executing the program based on CLI arguments
+        cli_mode(args)
+
+
+def parse_arguments():
+    """
+    Command line arguments parser
+    :return: the arguments which indicates the forums, and the url provided for the forum
+    :rtype: dict
+    """
+
+    # Create CLI argument parser
+    parser = argparse.ArgumentParser(description='Extracting forums posts, provide the flag of the forum you want extract data from and the url of the post')
+    group = parser.add_mutually_exclusive_group()
+    # Add arguments
+    group.add_argument('-ph', '--phpbb', type=str, help="phpBB")
+    group.add_argument('-vb', '--vbulletin', type=str, help="vBulletin")
+    group.add_argument('-r', '--reddit', type=str, help="Reddit")
+    # Parse the argument
+    args = vars(parser.parse_args())
+    return args
 
 
 def get_input():
@@ -59,9 +83,18 @@ def get_input():
         return ["reddit", url]
 
 
+def cli_input_validation(forum, url):
+    forum = forum.lower()
+    url = url.lower()
+    if forum in url:
+        return True
+    else:
+        return False
+
+
 def interactive_mode():
     """
-    Executing interactive input gathering from user
+    Executing the extractor interactively by gathering input from user
     """
     forum = get_input()
     if forum[0] == "phpbb":
@@ -72,6 +105,29 @@ def interactive_mode():
         extractor.extract()
     else:
         extractor = Extractor(forum[1], REDDIT_TARGET_ELEMENT, REDDIT_TARGET_CLASS)
+        extractor.extract()
+
+
+def cli_mode(args):
+    """
+    Executing the extractor by provided input in CLI
+    """
+    for key, value in args.items():
+        if value != None:
+            forum = key
+            url = value
+            break
+    if not cli_input_validation(forum, url):
+        print(f"You insered invalid url for {forum} forum")
+        return
+    if forum == "phpbb":
+        extractor = Extractor(url, PHPBB_TARGET_ELEMENT, PHPBB_TARGET_CLASS)
+        extractor.extract()
+    elif forum == "vbulletin":
+        extractor = Extractor(url, VBULLETIN_TARGET_ELEMENT, VBULLETIN_TARGET_CLASS)
+        extractor.extract()
+    else:
+        extractor = Extractor(url, REDDIT_TARGET_ELEMENT, REDDIT_TARGET_CLASS)
         extractor.extract()
 
 
