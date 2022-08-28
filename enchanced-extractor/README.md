@@ -14,7 +14,8 @@ Simple tool to extract posts and comments data from different forums. The tool e
     $ cd extractor/enchanced-extractor
     $ pip install -r requirements.txt
 ```
-
+We also need to including `chromedriver`, [download chromedriver](https://chromedriver.chromium.org/downloads) notice that you need to download the chromedriver with the correct version according to the installed chrome version in your PC.  
+After downloading the chromedriver include it in the `extractor/enchanced-extractor/` folder
 ## Dependencies
 
 * [Selenium](https://www.selenium.dev/) >= 4.4.3
