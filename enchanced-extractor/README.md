@@ -23,6 +23,7 @@ After downloading the chromedriver include it in the `extractor/enchanced-extrac
 
 
 ## Usage
+Currently the program supports three forums: `phpBB` `vBulletin` `Reddit`
 ```bash
     $ python controller.py
 ```
